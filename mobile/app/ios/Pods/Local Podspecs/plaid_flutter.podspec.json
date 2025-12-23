@@ -1,0 +1,28 @@
+{
+  "name": "plaid_flutter",
+  "version": "0.0.1",
+  "summary": "Plaid Link plugin for Flutter",
+  "description": "Enables Plaid in Flutter apps.",
+  "homepage": "http://github.com/jorgefspereira",
+  "license": {
+    "file": "../LICENSE"
+  },
+  "authors": {
+    "Jorge Pereira": "jorgefspereira@icloud.com"
+  },
+  "source": {
+    "path": "."
+  },
+  "source_files": "Classes/**/*",
+  "public_header_files": "Classes/**/*.h",
+  "dependencies": {
+    "Flutter": [],
+    "Plaid": [
+      "4.7.6"
+    ]
+  },
+  "static_framework": true,
+  "platforms": {
+    "ios": "11.0"
+  }
+}
