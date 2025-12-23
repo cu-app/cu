@@ -1,10 +1,12 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:cu_design_system_omni/cu_design_system_omni.dart';
 import 'dart:math' as math;
 import 'membership_selection_screen.dart';
 import 'feature_overview_screen.dart';
 import 'personalization_screen.dart';
 import 'completion_screen.dart';
+import 'package:flutter/material.dart' show Material, MaterialType, PageView, PageController;
 
 /// Main onboarding flow controller - Spotify-style with NG Skinner design principles
 class OnboardingScreen extends StatefulWidget {
@@ -137,7 +139,7 @@ class _OnboardingScreenState extends State<OnboardingScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return CUScaffold(
       backgroundColor: const Color(0xFF191414),
       body: Stack(
         children: [
