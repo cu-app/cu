@@ -1,83 +1,85 @@
-// Copyright 2021 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:cu_design_system_omni/cu_design_system_omni.dart';
 
 class TypographyScreen extends StatelessWidget {
   const TypographyScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final textTheme =
-        Theme.of(
-          context,
-        ).textTheme.apply(
-          displayColor: Theme.of(context).colorScheme.onSurface,
-        );
-    return Expanded(
-      child: ListView(
+    final theme = CUTheme.of(context);
+    
+    return CUScaffold(
+      appBar: CUAppBar(
+        title: Text(
+          'Typography',
+          style: CUTypography.titleLarge.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: ListView(
+        padding: EdgeInsets.all(CUSpacing.md),
         children: <Widget>[
-          const SizedBox(height: 8),
+          SizedBox(height: CUSpacing.sm),
           TextStyleExample(
             name: 'Display Large',
-            style: textTheme.displayLarge!,
+            style: CUTypography.displayLarge,
           ),
           TextStyleExample(
             name: 'Display Medium',
-            style: textTheme.displayMedium!,
+            style: CUTypography.displayMedium,
           ),
           TextStyleExample(
             name: 'Display Small',
-            style: textTheme.displaySmall!,
+            style: CUTypography.displaySmall,
           ),
           TextStyleExample(
             name: 'Headline Large',
-            style: textTheme.headlineLarge!,
+            style: CUTypography.headlineLarge,
           ),
           TextStyleExample(
             name: 'Headline Medium',
-            style: textTheme.headlineMedium!,
+            style: CUTypography.headlineMedium,
           ),
           TextStyleExample(
             name: 'Headline Small',
-            style: textTheme.headlineSmall!,
+            style: CUTypography.headlineSmall,
           ),
           TextStyleExample(
             name: 'Title Large',
-            style: textTheme.titleLarge!,
+            style: CUTypography.titleLarge,
           ),
           TextStyleExample(
             name: 'Title Medium',
-            style: textTheme.titleMedium!,
+            style: CUTypography.titleMedium,
           ),
           TextStyleExample(
             name: 'Title Small',
-            style: textTheme.titleSmall!,
+            style: CUTypography.titleSmall,
           ),
           TextStyleExample(
             name: 'Label Large',
-            style: textTheme.labelLarge!,
+            style: CUTypography.labelLarge,
           ),
           TextStyleExample(
             name: 'Label Medium',
-            style: textTheme.labelMedium!,
+            style: CUTypography.labelMedium,
           ),
           TextStyleExample(
             name: 'Label Small',
-            style: textTheme.labelSmall!,
+            style: CUTypography.labelSmall,
           ),
           TextStyleExample(
             name: 'Body Large',
-            style: textTheme.bodyLarge!,
+            style: CUTypography.bodyLarge,
           ),
           TextStyleExample(
             name: 'Body Medium',
-            style: textTheme.bodyMedium!,
+            style: CUTypography.bodyMedium,
           ),
           TextStyleExample(
             name: 'Body Small',
-            style: textTheme.bodySmall!,
+            style: CUTypography.bodySmall,
           ),
         ],
       ),
@@ -98,7 +100,7 @@ class TextStyleExample extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.all(CUSpacing.sm),
       child: Text(name, style: style),
     );
   }

@@ -1,10 +1,8 @@
-// Copyright 2021 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:cu_design_system_omni/cu_design_system_omni.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter/material.dart' show Colors, ThemeData, ColorScheme, Brightness, Card, Clip;
 
 import 'scheme.dart';
 
@@ -20,7 +18,8 @@ class ColorPalettesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Color selectedColor = Theme.of(context).primaryColor;
+    final theme = CUTheme.of(context);
+    final Color selectedColor = theme.colorScheme.primary;
     final ThemeData lightTheme = ThemeData(
       colorSchemeSeed: selectedColor,
       brightness: Brightness.light,
@@ -32,17 +31,19 @@ class ColorPalettesScreen extends StatelessWidget {
 
     Widget schemeLabel(String brightness) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: EdgeInsets.symmetric(vertical: CUSpacing.md),
         child: Text(
           brightness,
-          style: const TextStyle(fontWeight: FontWeight.bold),
+          style: CUTypography.titleMedium.copyWith(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       );
     }
 
     Widget schemeView(ThemeData theme) {
       return Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 15),
+        padding: EdgeInsets.symmetric(horizontal: CUSpacing.md),
         child: ColorSchemeView(colorScheme: theme.colorScheme),
       );
     }
@@ -50,7 +51,7 @@ class ColorPalettesScreen extends StatelessWidget {
     Widget dynamicColorNotice() => RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
-        style: Theme.of(context).textTheme.bodySmall,
+        style: CUTypography.bodySmall,
         children: [
           const TextSpan(
             text:
@@ -60,7 +61,7 @@ class ColorPalettesScreen extends StatelessWidget {
           ),
           TextSpan(
             text: 'dynamic_color',
-            style: const TextStyle(decoration: TextDecoration.underline),
+            style: TextStyle(decoration: TextDecoration.underline),
             recognizer: TapGestureRecognizer()
               ..onTap = () async {
                 final url = Uri.parse(
@@ -76,7 +77,16 @@ class ColorPalettesScreen extends StatelessWidget {
       ),
     );
 
-    return Expanded(
+    return CUScaffold(
+      appBar: CUAppBar(
+        title: Text(
+          'Color Palettes',
+          style: CUTypography.titleLarge.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: Expanded(
       child: LayoutBuilder(
         builder: (context, constraints) {
           if (constraints.maxWidth < narrowScreenWidthThreshold) {
@@ -106,7 +116,7 @@ class ColorPalettesScreen extends StatelessWidget {
             );
             return SingleChildScrollView(
               child: Padding(
-                padding: const EdgeInsets.all(8),
+                padding: EdgeInsets.all(CUSpacing.sm),
                 child: Column(
                   children: [
                     SchemePreview(
@@ -116,7 +126,7 @@ class ColorPalettesScreen extends StatelessWidget {
                       contrast: 1.0,
                       colorMatch: false,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: CUSpacing.md),
                     SchemePreview(
                       label: 'Dark ColorScheme',
                       scheme: darkScheme,
@@ -124,13 +134,14 @@ class ColorPalettesScreen extends StatelessWidget {
                       contrast: 1.0,
                       colorMatch: false,
                     ),
-                    const SizedBox(height: 16),
+                    SizedBox(height: CUSpacing.md),
                   ],
                 ),
               ),
             );
           }
         },
+      ),
       ),
     );
   }
@@ -417,8 +428,7 @@ class ColorGroup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepaintBoundary(
-      child: Card(
-        clipBehavior: Clip.antiAlias,
+      child: CUCard(
         child: Column(children: children),
       ),
     );
@@ -450,11 +460,11 @@ class ColorChip extends StatelessWidget {
     return Container(
       color: color,
       child: Padding(
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(CUSpacing.md),
         child: Row(
           children: [
             Expanded(
-              child: Text(label, style: TextStyle(color: labelColor)),
+              child: Text(label, style: CUTypography.bodyMedium.copyWith(color: labelColor)),
             ),
           ],
         ),

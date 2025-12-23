@@ -1,25 +1,32 @@
-// Copyright 2021 The Flutter team. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
-import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:cu_design_system_omni/cu_design_system_omni.dart';
 
 class ElevationScreen extends StatelessWidget {
   const ElevationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final Color shadowColor = Theme.of(context).colorScheme.shadow;
-    final Color surfaceTint = Theme.of(context).colorScheme.primary;
-    return Expanded(
-      child: CustomScrollView(
+    final theme = CUTheme.of(context);
+    final Color shadowColor = theme.colorScheme.shadow;
+    final Color surfaceTint = theme.colorScheme.primary;
+    
+    return CUScaffold(
+      appBar: CUAppBar(
+        title: Text(
+          'Elevation',
+          style: CUTypography.titleLarge.copyWith(
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
             child: Padding(
-              padding: const EdgeInsets.fromLTRB(16.0, 20, 16.0, 0),
+              padding: EdgeInsets.fromLTRB(CUSpacing.md, CUSpacing.lg, CUSpacing.md, 0),
               child: Text(
                 'Surface Tint Color Only',
-                style: Theme.of(context).textTheme.titleLarge,
+                style: CUTypography.titleLarge,
               ),
             ),
           ),
@@ -29,12 +36,12 @@ class ElevationScreen extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate(<Widget>[
-              const SizedBox(height: 10),
+              SizedBox(height: CUSpacing.sm),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                padding: EdgeInsets.fromLTRB(CUSpacing.md, CUSpacing.sm, CUSpacing.md, 0),
                 child: Text(
                   'Surface Tint Color and Shadow Color',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: CUTypography.titleLarge,
                 ),
               ),
             ]),
@@ -45,12 +52,12 @@ class ElevationScreen extends StatelessWidget {
           ),
           SliverList(
             delegate: SliverChildListDelegate(<Widget>[
-              const SizedBox(height: 10),
+              SizedBox(height: CUSpacing.sm),
               Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 8.0, 16.0, 0),
+                padding: EdgeInsets.fromLTRB(CUSpacing.md, CUSpacing.sm, CUSpacing.md, 0),
                 child: Text(
                   'Shadow Color Only',
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: CUTypography.titleLarge,
                 ),
               ),
             ]),
@@ -63,6 +70,9 @@ class ElevationScreen extends StatelessWidget {
 }
 
 const double narrowScreenWidthThreshold = 450;
+
+// Import Colors for transparent
+import 'package:flutter/material.dart' show Colors;
 
 class ElevationGrid extends StatelessWidget {
   const ElevationGrid({
@@ -92,7 +102,7 @@ class ElevationGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SliverPadding(
-      padding: const EdgeInsets.all(8),
+      padding: EdgeInsets.all(CUSpacing.sm),
       sliver: SliverLayoutBuilder(
         builder: (context, constraints) {
           if (constraints.crossAxisExtent < narrowScreenWidthThreshold) {
@@ -139,32 +149,26 @@ class _ElevationCardState extends State<ElevationCard> {
 
   @override
   Widget build(BuildContext context) {
-    const BorderRadius borderRadius = BorderRadius.all(
-      Radius.circular(4.0),
-    );
-    final Color color = Theme.of(context).colorScheme.surface;
+    final theme = CUTheme.of(context);
+    final Color color = theme.colorScheme.surface;
 
     return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Material(
-        borderRadius: borderRadius,
+      padding: EdgeInsets.all(CUSpacing.sm),
+      child: CUCard(
         elevation: _elevation,
-        color: color,
-        shadowColor: widget.shadowColor,
-        surfaceTintColor: widget.surfaceTint,
-        type: MaterialType.card,
+        backgroundColor: color,
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(CUSpacing.sm),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
                 'Level ${widget.info.level}',
-                style: Theme.of(context).textTheme.labelMedium,
+                style: CUTypography.labelMedium,
               ),
               Text(
                 '${widget.info.elevation.toInt()} dp',
-                style: Theme.of(context).textTheme.labelMedium,
+                style: CUTypography.labelMedium,
               ),
               if (widget.surfaceTint != null)
                 Expanded(
@@ -172,7 +176,7 @@ class _ElevationCardState extends State<ElevationCard> {
                     alignment: Alignment.bottomRight,
                     child: Text(
                       '${widget.info.overlayPercent}%',
-                      style: Theme.of(context).textTheme.bodySmall,
+                      style: CUTypography.bodySmall,
                     ),
                   ),
                 ),
